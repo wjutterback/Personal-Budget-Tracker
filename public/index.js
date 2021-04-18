@@ -1,41 +1,7 @@
 let transactions = [];
 let myChart;
 
-const request = window.indexedDB.open('offlineBudget', 1);
-request.onupgradeneeded = ({ target }) => {
-  const db = target.result;
-  const objectStore = db.createObjectStore('offlineBudget', {
-    keyPath: 'budgetId',
-    autoIncrement: true,
-  });
-  objectStore.createIndex('budgetIndex', 'budget');
-};
-request.onsuccess = () => {
-  const db = request.result;
-  const transaction = db.transaction(['offlineBudget'], 'readwrite');
-  const budgetStore = transaction.objectStore('offlineBudget');
-  const budgetIndex = budgetStore.index('budgetIndex');
 
-  // Adds data to our objectStore
-  budgetStore.add({
-    budgetId: '1',
-    funds: 'Money-added-or-subtracted-element-dot-val',
-  });
-
-  // Return an item by keyPath
-  const getRequest = budgetStore.get('1');
-  getRequest.onsuccess = () => {
-    console.log(getRequest.result);
-  };
-
-  // Return an item by index
-  const getRequestIdx = budgetIndex.getAll(
-    'Money-added-or-subtracted-element-dot-val'
-  );
-  getRequestIdx.onsuccess = () => {
-    console.log(getRequestIdx.result);
-  };
-};
 
 fetch('/api/transaction')
   .then((response) => {
