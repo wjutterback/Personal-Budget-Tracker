@@ -10,7 +10,7 @@
 
 ## Link to Deployed Application
 
-https://wills-budget-tracker.herokuapp.com/
+https://will-budget-tracker.herokuapp.com/
 
 ## Table of Contents
 
